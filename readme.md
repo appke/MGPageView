@@ -4,7 +4,6 @@
 
 ###iOS9, 点击状态回到scrollView回到最顶部
 
-
 ```objc
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // 添加一个window,屏幕上的scrollView滚动到最顶部
@@ -29,19 +28,12 @@ static UIWindow *topWindow_;
 }
 @end
 ```
-
-实现MGTopViewController的
 ```
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-```方法，点击状态栏，scrollView滚动最前面去
-
-
-
+实现MGTopViewController的- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event方法，点击状态栏，scrollView滚动最前面去
+```
 
 ###window的控制器决定状态栏的显示隐藏和样式
 ```objc 
-
-
 #pragma mark - 状态栏控制
 - (BOOL)prefersStatusBarHidden
 {
@@ -66,4 +58,3 @@ static UIWindow *topWindow_;
     [self setNeedsStatusBarAppearanceUpdate];
 }
 ```
-
