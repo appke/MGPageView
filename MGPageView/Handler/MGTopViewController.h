@@ -3,7 +3,7 @@
 //  SMPagerTab
 //
 //  Created by 穆良 on 16/6/14.
-//  Copyright © 2016年 starming. All rights reserved.
+//  Copyright © 2016年 MG. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -2,8 +2,8 @@
 //  ViewController.m
 //  SMPagerTab
 //
-//  Created by ming on 15/7/4.
-//  Copyright (c) 2015年 starming. All rights reserved.
+//  Created by 穆良 on 15/7/4.
+//  Copyright (c) 2015年 MG. All rights reserved.
 //
 
 #import "ViewController.h"

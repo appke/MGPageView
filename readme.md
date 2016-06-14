@@ -2,7 +2,7 @@
 页面滑动切换tab
 
 
-###iOS9, 点击状态回到scrollView回到最顶部
+### iOS9, 点击状态回到scrollView回到最顶部
 
 ```objc
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -17,16 +17,27 @@
 static UIWindow *topWindow_;
 
 + (void)initialize {
-    
+
     topWindow_ = [[UIWindow alloc] init];
     topWindow_.frame = [UIApplication sharedApplication].statusBarFrame;
     topWindow_.windowLevel = UIWindowLevelAlert;
     topWindow_.backgroundColor = [UIColor clearColor];
-    
+
     MGTopViewController *rootVc = [MGTopViewController shareInstance];
     topWindow_.rootViewController = rootVc;
 }
 @end
+
++ (void)show
+{
+    topWindow_.hidden = NO;
+}
+
++ (void)hide
+{
+    topWindow_.hidden = YES;
+}
+
 ```
 ---
 点击状态栏，scrollView滚动最前面去
@@ -65,8 +76,9 @@ static UIWindow *topWindow_;
 }
 ```
 ---
+
 ###window的控制器决定状态栏的显示隐藏和样式
-```objc 
+```objc
 // MGTopViewController.m
 #pragma mark - 状态栏控制
 - (BOOL)prefersStatusBarHidden

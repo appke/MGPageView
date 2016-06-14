@@ -45,11 +45,11 @@
         UIViewController* vc = [self.delegate pagerViewOfPagers:self indexOfPagers:i];
         [self.viewsArray addObject:vc];
         [self.bodyScrollView addSubview:vc.view];
-        
+
         //tab上按钮
-        UIButton* itemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGFloat itemButtonWidth = (self.width - self.tabMargin*2)/number;
-        [itemButton setFrame:CGRectMake(self.tabMargin + itemButtonWidth*i, 0, itemButtonWidth, self.tabFrameHeight)];
+        UIButton *itemButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        CGFloat itemButtonWidth = (self.width - self.tabMargin * 2) / number;
+        [itemButton setFrame:CGRectMake(self.tabMargin + itemButtonWidth * i, 0, itemButtonWidth, self.tabFrameHeight)];
         [itemButton.titleLabel setBaselineAdjustment:UIBaselineAdjustmentAlignCenters];
         [itemButton.titleLabel setFont:[UIFont systemFontOfSize:self.tabButtonFontSize]];
         [itemButton setTitle:vc.title forState:UIControlStateNormal];
@@ -59,7 +59,7 @@
         itemButton.tag = i;
         [self.tabButtons addObject:itemButton];
         [self.tabView addSubview:itemButton];
-        
+
         //tab上的红点
         UIView* aRedDot = [[UIView alloc] initWithFrame:CGRectMake(itemButton.width / 2 + [self buttonTitleRealSize:itemButton].width / 2 + 3, itemButton.height / 2 - [self buttonTitleRealSize:itemButton].height / 2, 8, 8)];
         aRedDot.backgroundColor = [UIColor redColor];
@@ -85,7 +85,7 @@
     if (_isBuildUI) {
         self.bodyScrollView.contentSize = CGSizeMake(self.width * [self.viewsArray count], self.tabFrameHeight);
         for (int i = 0; i < [self.viewsArray count]; i++) {
-            UIViewController* vc = self.viewsArray[i];
+            UIViewController *vc = self.viewsArray[i];
             vc.view.frame = CGRectMake(self.bodyScrollView.width * i, self.tabFrameHeight, self.bodyScrollView.width, self.bodyScrollView.height);
         }
     }

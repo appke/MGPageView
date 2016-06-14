@@ -2,8 +2,8 @@
 //  SMTopWindow.h
 //  WeiboOffline
 //
-//  Created by DaiMing on 15/9/6.
-//  Copyright (c) 2015年 starming. All rights reserved.
+//  Created by 穆良 on 15/9/6.
+//  Copyright (c) 2015年 MG. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

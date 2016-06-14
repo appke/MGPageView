@@ -2,14 +2,14 @@
 //  AppDelegate.m
 //  SMPagerTab
 //
-//  Created by ming on 15/7/4.
-//  Copyright (c) 2015年 starming. All rights reserved.
+//  Created by 穆良 on 15/7/4.
+//  Copyright (c) 2015年 MG. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "MGTopViewController.h"
 #import "MGTopWindow.h"
 #import "ViewController.h"
-#import "MGTopViewController.h"
 
 @interface AppDelegate ()
 /** 窗口 */
@@ -18,23 +18,19 @@
 
 @implementation AppDelegate
 
-
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-//    [SMTopWindow work];
-    
-//    self.topWindow = [[UIWindow alloc] init];
-//    self.topWindow.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20);
-//    self.topWindow.windowLevel = UIWindowLevelAlert;
-//    self.topWindow.hidden = NO;
-//    self.topWindow.backgroundColor = [UIColor clearColor];
-//    
-//    self.topWindow.rootViewController = [MGTopViewController shareInstance];
-//    [self.topWindow addSubview:[[UISwitch alloc] init]];
-    
-    
+    //    [SMTopWindow work];
+
+    //    self.topWindow = [[UIWindow alloc] init];
+    //    self.topWindow.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20);
+    //    self.topWindow.windowLevel = UIWindowLevelAlert;
+    //    self.topWindow.hidden = NO;
+    //    self.topWindow.backgroundColor = [UIColor clearColor];
+    //
+    //    self.topWindow.rootViewController = [MGTopViewController shareInstance];
+    //    [self.topWindow addSubview:[[UISwitch alloc] init]];
+
     return YES;
 }
 
