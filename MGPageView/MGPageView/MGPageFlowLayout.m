@@ -17,16 +17,12 @@
     self.minimumLineSpacing = 0; // item之间距离
     self.minimumInteritemSpacing = 0; // section之间距离
     
-    
     if (self.collectionView.bounds.size.height) {
-        
         self.itemSize = self.collectionView.bounds.size;
-        NSLog(@"----%@", NSStringFromCGSize(self.collectionView.bounds.size));
     }
 
     self.sectionInset = UIEdgeInsetsZero;
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    
 }
 
 @end

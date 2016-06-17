@@ -11,11 +11,9 @@
 #import "MGPageFlowLayout.h"
 #import "MGPageTitleLabel.h"
 #import "UIViewAdditions.h"
+#import "UIView+Frame.h"
 
 @interface MGPageViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
-
-/** 红^指示器 */
-@property (nonatomic, weak) UIView *underLine;
 
 /** 顶部所有标签栏 */
 @property (nonatomic, weak) UIScrollView *titlesView;
@@ -26,19 +24,22 @@
 /** 所有内容=滚动内容+标题栏 */
 @property (nonatomic, weak) UIView *contentView;
 
-/** 当前选中的按钮 */
-@property (nonatomic, weak) MGPageTitleLabel *selectedLabel;
-
-
 /* 是否初始化,却换时 */
 @property (nonatomic, assign) BOOL isInitial;
 /** 标题间距 */
 @property (nonatomic, assign) CGFloat titleMargin;
-
 /** 所有标题宽度数组 */
 @property (nonatomic, strong) NSMutableArray *titleWidths;
 /** 所有标题数组 */
 @property (nonatomic, strong) NSMutableArray *titleLabels;
+
+
+/** 下划线 */
+@property (nonatomic, weak) UIView *underLine;
+/** 当前选中的Label */
+//@property (nonatomic, weak) MGPageTitleLabel *selectedLabel;
+/** 保存上一次选中的索引 */
+@property (nonatomic, assign) NSInteger selectedIndex;
 
 @end
 
@@ -66,6 +67,22 @@
 }
 
 #pragma mark - 属性懒加载
+- (UIColor *)norColor
+{
+    if (_norColor == nil) {
+        _norColor = [UIColor grayColor];
+    }
+    return _norColor;
+}
+
+- (UIColor *)selColor
+{
+    if (_selColor == nil) {
+        _selColor = [UIColor redColor];
+    }
+    return _selColor;
+}
+
 - (UIFont *)titleFont
 {
     if (_titleFont == nil) {
@@ -114,7 +131,6 @@
         titlesView.backgroundColor = _titleViewColor ? _titleViewColor : [UIColor colorWithWhite:1 alpha:0.8];
         titlesView.showsHorizontalScrollIndicator = NO;
         [self.contentView addSubview:titlesView];
-//        [self.view addSubview:titlesView];
     }
     return _titlesView;
 }
@@ -137,8 +153,6 @@
         contentCollectionView.dataSource = self;
         
         [self.contentView insertSubview:contentCollectionView belowSubview:self.titlesView];
-//        [self.view insertSubview:contentCollectionView belowSubview:self.titlesView];
-        
     }
     
     return _contentCollectionView;
@@ -154,6 +168,19 @@
     }
     return _contentView;
 }
+
+- (UIView *)underLine
+{
+    if (!_underLine) {
+        UIView *underLine = [[UIView alloc] init];
+        _underLine = underLine;
+        
+        underLine.backgroundColor = _underLineColor ? _underLineColor : [UIColor redColor];
+        [self.titlesView addSubview:underLine];
+    }
+    return _underLine;
+}
+
 
 // 懒加载不设置frame在生命周期中设置
 #pragma mark - 控制器生命周期方法
@@ -172,7 +199,7 @@
     
     // 设置标题视图尺寸
     CGFloat titlesViewY = self.navigationController ? MGNavBarH : MGStatusBarH;
-    CGFloat titlesViewH = _titleHeight ? _titleHeight : MGTitlesViewH;
+    CGFloat titlesViewH = self.titleHeight;
     self.titlesView.frame = CGRectMake(0, titlesViewY, contentW, titlesViewH);
     
     // 设置滚动内容尺寸
@@ -262,7 +289,7 @@
         label.tag = i;
         label.text = vc.title;
         label.font = self.titleFont;
-        label.textColor = [UIColor redColor];
+        label.textColor = self.norColor;
         
         // label的位置
         labelW = [self.titleWidths[i] floatValue];
@@ -297,8 +324,62 @@
 - (void)titleClick:(UITapGestureRecognizer *)tap
 {
     
-//    MGPageTitleLabel *label = (MGPageTitleLabel *)tap.view;
+    MGPageTitleLabel *label = (MGPageTitleLabel *)tap.view;
+    // 选中操作
+    [self selectLabel:label];
     
+    // 让内容跟着变动
+    NSInteger i = label.tag;
+    // 内容滚动视图 应该到的位置
+    CGFloat offsetX = i * SCREEN_WIDTH;
+    [self.contentCollectionView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
+#warning send notice
+    _selectedIndex = i;
+}
+
+- (void)selectLabel:(UILabel *)label
+{
+    
+    for (MGPageTitleLabel *labelView in self.titleLabels) {
+     
+        if (labelView == label) continue;
+
+        // 其它label
+        labelView.textColor = self.norColor;
+    }
+    
+    // 选中的Laebl的颜色
+    label.textColor = self.selColor;
+    
+    // 设置标题居中
+    [self setLabelTitleCenter:label];
+    
+    // 设置下标的位置
+    [self setupUnderLine:label];
+    
+}
+
+// 设置下标的位置
+- (void)setupUnderLine:(UILabel *)label
+{
+    // 获取文字尺寸
+    CGSize titleBounds = [label.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.titleFont} context:nil].size;
+    
+    CGFloat underLineH = _underLineH ? _underLineH : MGUnderLineH;
+    self.underLine.y = label.height - underLineH;
+    self.underLine.height = underLineH;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        self.underLine.x = label.x;
+        self.underLine.width = titleBounds.width;
+    }];
+}
+
+// 让选中的label居中
+- (void)setLabelTitleCenter:(UILabel *)label
+{
+    //
 }
 
 
@@ -323,6 +404,23 @@
 
     return cell;
 }
+
+#pragma mark - UIScrollViewDelegate
+// 减速完成
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+
+    CGFloat offsetX = scrollView.contentOffset.x;
+    // 获得角标
+    NSInteger i = offsetX / SCREEN_WIDTH;
+    // 选中标题
+    [self selectLabel:self.titleLabels[i]];
+#warning add notice
+    
+}
+
+// 监听scrollView的滚动，主要是cover和文字渐变
+
 
 
 @end

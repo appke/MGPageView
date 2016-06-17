@@ -105,6 +105,7 @@
         [self.view addSubview:_segmentView];
     }
     return _segmentView;
+
 }
 
 @end
