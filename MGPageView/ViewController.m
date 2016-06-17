@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "UIViewAdditions.h"
 #import "SMWebViewController.h"
+#import "MGTableViewController.h"
+#import "MGViewController.h"
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -23,7 +25,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = [UIColor redColor];
+   
+    MGTableViewController *four = [[MGTableViewController alloc] init];
+    four.title = @"表格";
+    [self addChildViewController:four];
+    
+    
+    MGViewController *five = [[MGViewController alloc] init];
+    five.title = @"空的";
+    [self addChildViewController:five];
+    
     
     SMWebViewController *one = [[SMWebViewController alloc]initWithNibName:nil bundle:nil];
     one.title = @"我的";
@@ -40,6 +52,8 @@
     three.webUrlString = @"https://github.com/angmu/MGPageView/blob/master/MGPageView/Handler/MGTopViewController.m";
     [self addChildViewController:three];
     
+    
+    self.isFullDisplay = YES;
 }
 
 

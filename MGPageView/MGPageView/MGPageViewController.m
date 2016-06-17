@@ -10,8 +10,7 @@
 #import "MGPageViewConst.h"
 #import "MGPageFlowLayout.h"
 #import "MGPageTitleLabel.h"
-
-
+#import "UIViewAdditions.h"
 
 @interface MGPageViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -41,18 +40,29 @@
 /** 所有标题数组 */
 @property (nonatomic, strong) NSMutableArray *titleLabels;
 
-
 @end
 
 @implementation MGPageViewController
 
-#pragma mark - 初始化
+#pragma mark - 初始化方法
+- (instancetype)init
+{
+    if (self = [super init]) {
+        [self initial];
+    }
+    return self;
+}
+
+- (void)awakeFromNib
+{
+    [self initial];
+}
+
 - (void)initial
 {
     // 不要自动调整inset
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    
+    // 这个bug调了2小时，要调用这个方法
 }
 
 #pragma mark - 属性懒加载
@@ -72,7 +82,6 @@
     return _titleHeight;
 }
 
-
 - (NSMutableArray *)titleWidths
 {
     if (_titleWidths == nil) {
@@ -89,6 +98,11 @@
     return _titleLabels;
 }
 
+//- (void)setIsFullDisplay:(BOOL)isFullDisplay
+//{
+//    _isFullDisplay = isFullDisplay;
+//}
+
 #pragma mark - 控件懒加载
 // 标题滚动视图
 - (UIScrollView *)titlesView
@@ -97,8 +111,10 @@
         
         UIScrollView *titlesView = [[UIScrollView alloc] init];
         _titlesView = titlesView;
+        titlesView.backgroundColor = _titleViewColor ? _titleViewColor : [UIColor colorWithWhite:1 alpha:0.8];
         titlesView.showsHorizontalScrollIndicator = NO;
         [self.contentView addSubview:titlesView];
+//        [self.view addSubview:titlesView];
     }
     return _titlesView;
 }
@@ -121,6 +137,8 @@
         contentCollectionView.dataSource = self;
         
         [self.contentView insertSubview:contentCollectionView belowSubview:self.titlesView];
+//        [self.view insertSubview:contentCollectionView belowSubview:self.titlesView];
+        
     }
     
     return _contentCollectionView;
@@ -145,7 +163,12 @@
     
     // 设置整个内容尺寸
     CGFloat contentW = SCREEN_WIDTH;
-    self.contentView.frame = CGRectMake(0, 0, contentW, SCREEN_HEIGHT);
+    // 设置整个内容的尺寸
+    if (self.contentView.frame.size.height == 0) {
+        // 没有设置内容尺寸，才需要设置内容尺寸
+        self.contentView.frame = CGRectMake(0, 0, contentW, SCREEN_HEIGHT);
+    }
+    
     
     // 设置标题视图尺寸
     CGFloat titlesViewY = self.navigationController ? MGNavBarH : MGStatusBarH;
@@ -290,17 +313,16 @@
 {
     UICollectionViewCell *cell = [self.contentCollectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
     
+    
     // 移除之前的子控件
     [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     // 添加控制器
     UIViewController *vc = self.childViewControllers[indexPath.item];
     vc.view.frame = CGRectMake(0, 0, self.contentCollectionView.frame.size.width, self.contentCollectionView.frame.size.height);
     [cell.contentView addSubview:vc.view];
-    
+
     return cell;
 }
-
-
 
 
 @end

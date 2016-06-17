@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CC4B037A1D1432F20019A290 /* MGPageTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4B03791D1432F20019A290 /* MGPageTitleLabel.m */; };
 		CC4B037D1D143D400019A290 /* MGPageFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4B037C1D143D400019A290 /* MGPageFlowLayout.m */; };
+		CC4B03801D1442350019A290 /* MGTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4B037F1D1442350019A290 /* MGTableViewController.m */; };
+		CC4B03831D145B0C0019A290 /* MGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4B03821D145B0C0019A290 /* MGViewController.m */; };
 		CC66B7AE1D13FC6100E64F3C /* MGPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC66B7AD1D13FC6100E64F3C /* MGPageViewController.m */; };
 		CC70F59C1D0FB3580029761C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC70F5841D0FB3580029761C /* AppDelegate.m */; };
 		CC70F59D1D0FB3580029761C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC70F5851D0FB3580029761C /* LaunchScreen.xib */; };
@@ -42,6 +44,10 @@
 		CC4B03791D1432F20019A290 /* MGPageTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPageTitleLabel.m; sourceTree = "<group>"; };
 		CC4B037B1D143D400019A290 /* MGPageFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPageFlowLayout.h; sourceTree = "<group>"; };
 		CC4B037C1D143D400019A290 /* MGPageFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPageFlowLayout.m; sourceTree = "<group>"; };
+		CC4B037E1D1442350019A290 /* MGTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTableViewController.h; sourceTree = "<group>"; };
+		CC4B037F1D1442350019A290 /* MGTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGTableViewController.m; sourceTree = "<group>"; };
+		CC4B03811D145B0C0019A290 /* MGViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGViewController.h; sourceTree = "<group>"; };
+		CC4B03821D145B0C0019A290 /* MGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGViewController.m; sourceTree = "<group>"; };
 		CC66B7AC1D13FC6100E64F3C /* MGPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPageViewController.h; sourceTree = "<group>"; };
 		CC66B7AD1D13FC6100E64F3C /* MGPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPageViewController.m; sourceTree = "<group>"; };
 		CC66B7AF1D13FFD100E64F3C /* MGPageViewConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGPageViewConst.h; sourceTree = "<group>"; };
@@ -125,12 +131,16 @@
 				CC66B7AB1D13FC3D00E64F3C /* MGPageView */,
 				CC70F58E1D0FB3580029761C /* SMPagerTabView */,
 				CC70F5AB1D0FB4B80029761C /* Supporting Files */,
+				CC70F5971D0FB3580029761C /* ViewController.h */,
+				CC70F5981D0FB3580029761C /* ViewController.m */,
 				CC70F5831D0FB3580029761C /* AppDelegate.h */,
 				CC70F5841D0FB3580029761C /* AppDelegate.m */,
 				CC70F5951D0FB3580029761C /* SMWebViewController.h */,
 				CC70F5961D0FB3580029761C /* SMWebViewController.m */,
-				CC70F5971D0FB3580029761C /* ViewController.h */,
-				CC70F5981D0FB3580029761C /* ViewController.m */,
+				CC4B037E1D1442350019A290 /* MGTableViewController.h */,
+				CC4B037F1D1442350019A290 /* MGTableViewController.m */,
+				CC4B03811D145B0C0019A290 /* MGViewController.h */,
+				CC4B03821D145B0C0019A290 /* MGViewController.m */,
 			);
 			path = MGPageView;
 			sourceTree = "<group>";
@@ -282,6 +292,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC4B037A1D1432F20019A290 /* MGPageTitleLabel.m in Sources */,
+				CC4B03831D145B0C0019A290 /* MGViewController.m in Sources */,
+				CC4B03801D1442350019A290 /* MGTableViewController.m in Sources */,
 				CC70F5A11D0FB3580029761C /* main.m in Sources */,
 				CC70F5A51D0FB3580029761C /* MGTopWindow.m in Sources */,
 				CC66B7AE1D13FC6100E64F3C /* MGPageViewController.m in Sources */,
@@ -422,6 +434,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "MGPageView/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = MGPageView;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -434,6 +447,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "MGPageView/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = MGPageView;
 			};
