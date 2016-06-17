@@ -12,8 +12,10 @@
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
 @interface ViewController ()
 @property (nonatomic, strong) NSMutableArray *allVC;
+
 @property (nonatomic, strong) SMPagerTabView *segmentView;
 @end
 
@@ -21,22 +23,42 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor lightGrayColor];
     
+    SMWebViewController *one = [[SMWebViewController alloc]initWithNibName:nil bundle:nil];
+    one.title = @"我的";
+    one.webUrlString = @"https://github.com/angmu";
+    [self addChildViewController:one];
+    
+    SMWebViewController *two = [[SMWebViewController alloc]initWithNibName:nil bundle:nil];
+    two.title = @"项目";
+    two.webUrlString = @"https://github.com/angmu/MGPageView";
+    [self addChildViewController:two];
+    
+    SMWebViewController *three = [[SMWebViewController alloc]initWithNibName:nil bundle:nil];
+    three.title = @"代码";
+    three.webUrlString = @"https://github.com/angmu/MGPageView/blob/master/MGPageView/Handler/MGTopViewController.m";
+    [self addChildViewController:three];
+    
+}
+
+
+- (void)test
+{
     _allVC = [NSMutableArray array];
     SMWebViewController *one = [[SMWebViewController alloc]initWithNibName:nil bundle:nil];
     one.title = @"我的";
-    one.webUrlString = @"https://github.com/ming1016";
+    one.webUrlString = @"https://github.com/angmu";
     [_allVC addObject:one];
     
     SMWebViewController *two = [[SMWebViewController alloc]initWithNibName:nil bundle:nil];
-    two.title = @"已阅";
-    two.webUrlString = @"https://github.com/ming1016/RSSRead";
+    two.title = @"项目";
+    two.webUrlString = @"https://github.com/angmu/MGPageView";
     [_allVC addObject:two];
     
     SMWebViewController *three = [[SMWebViewController alloc]initWithNibName:nil bundle:nil];
-    three.title = @"文章";
-    three.webUrlString = @"https://github.com/ming1016/study";
+    three.title = @"代码";
+    three.webUrlString = @"https://github.com/angmu/MGPageView/blob/master/MGPageView/Handler/MGTopViewController.m";
     [_allVC addObject:three];
     
     self.segmentView.delegate = self;

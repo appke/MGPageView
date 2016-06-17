@@ -9,6 +9,10 @@
 #import "SMPagerTabView.h"
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController <SMPagerTabViewDelegate>
+#import "MGPageViewController.h"
+
+
+//@interface ViewController : UIViewController <SMPagerTabViewDelegate>
+@interface ViewController : MGPageViewController
 
 @end

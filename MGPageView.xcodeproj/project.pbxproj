@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC4B037A1D1432F20019A290 /* MGPageTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4B03791D1432F20019A290 /* MGPageTitleLabel.m */; };
+		CC4B037D1D143D400019A290 /* MGPageFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4B037C1D143D400019A290 /* MGPageFlowLayout.m */; };
+		CC66B7AE1D13FC6100E64F3C /* MGPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC66B7AD1D13FC6100E64F3C /* MGPageViewController.m */; };
 		CC70F59C1D0FB3580029761C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC70F5841D0FB3580029761C /* AppDelegate.m */; };
 		CC70F59D1D0FB3580029761C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC70F5851D0FB3580029761C /* LaunchScreen.xib */; };
 		CC70F59E1D0FB3580029761C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC70F5871D0FB3580029761C /* Main.storyboard */; };
@@ -35,6 +38,13 @@
 /* Begin PBXFileReference section */
 		3AB0145F1B47E39E00F80FF7 /* MGPageView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MGPageView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB014781B47E39E00F80FF7 /* MGPageView.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MGPageView.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC4B03781D1432F20019A290 /* MGPageTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPageTitleLabel.h; sourceTree = "<group>"; };
+		CC4B03791D1432F20019A290 /* MGPageTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPageTitleLabel.m; sourceTree = "<group>"; };
+		CC4B037B1D143D400019A290 /* MGPageFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPageFlowLayout.h; sourceTree = "<group>"; };
+		CC4B037C1D143D400019A290 /* MGPageFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPageFlowLayout.m; sourceTree = "<group>"; };
+		CC66B7AC1D13FC6100E64F3C /* MGPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPageViewController.h; sourceTree = "<group>"; };
+		CC66B7AD1D13FC6100E64F3C /* MGPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPageViewController.m; sourceTree = "<group>"; };
+		CC66B7AF1D13FFD100E64F3C /* MGPageViewConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGPageViewConst.h; sourceTree = "<group>"; };
 		CC70F5831D0FB3580029761C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CC70F5841D0FB3580029761C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CC70F5861D0FB3580029761C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -94,10 +104,25 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CC66B7AB1D13FC3D00E64F3C /* MGPageView */ = {
+			isa = PBXGroup;
+			children = (
+				CC66B7AC1D13FC6100E64F3C /* MGPageViewController.h */,
+				CC66B7AD1D13FC6100E64F3C /* MGPageViewController.m */,
+				CC4B037B1D143D400019A290 /* MGPageFlowLayout.h */,
+				CC4B037C1D143D400019A290 /* MGPageFlowLayout.m */,
+				CC66B7AF1D13FFD100E64F3C /* MGPageViewConst.h */,
+				CC4B03781D1432F20019A290 /* MGPageTitleLabel.h */,
+				CC4B03791D1432F20019A290 /* MGPageTitleLabel.m */,
+			);
+			path = MGPageView;
+			sourceTree = "<group>";
+		};
 		CC70F5821D0FB3580029761C /* MGPageView */ = {
 			isa = PBXGroup;
 			children = (
 				CC70F5AA1D0FB43F0029761C /* Handler */,
+				CC66B7AB1D13FC3D00E64F3C /* MGPageView */,
 				CC70F58E1D0FB3580029761C /* SMPagerTabView */,
 				CC70F5AB1D0FB4B80029761C /* Supporting Files */,
 				CC70F5831D0FB3580029761C /* AppDelegate.h */,
@@ -256,10 +281,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC4B037A1D1432F20019A290 /* MGPageTitleLabel.m in Sources */,
 				CC70F5A11D0FB3580029761C /* main.m in Sources */,
 				CC70F5A51D0FB3580029761C /* MGTopWindow.m in Sources */,
+				CC66B7AE1D13FC6100E64F3C /* MGPageViewController.m in Sources */,
 				CC70F59C1D0FB3580029761C /* AppDelegate.m in Sources */,
 				CC70F5A31D0FB3580029761C /* SMPagerTabView.m in Sources */,
+				CC4B037D1D143D400019A290 /* MGPageFlowLayout.m in Sources */,
 				CC70F5A21D0FB3580029761C /* MGTopViewController.m in Sources */,
 				CC70F5A71D0FB3580029761C /* ViewController.m in Sources */,
 				CC70F5A41D0FB3580029761C /* UIViewAdditions.m in Sources */,
