@@ -28,7 +28,7 @@
     self.view.backgroundColor = [UIColor redColor];
    
     MGTableViewController *four = [[MGTableViewController alloc] init];
-    four.title = @"表格";
+    four.title = @"表格表格表格表格";
     [self addChildViewController:four];
     
     
@@ -38,7 +38,7 @@
     
     
     SMWebViewController *one = [[SMWebViewController alloc]initWithNibName:nil bundle:nil];
-    one.title = @"我的";
+    one.title = @"我的我的我的我的";
     one.webUrlString = @"https://github.com/angmu";
     [self addChildViewController:one];
     
@@ -48,10 +48,12 @@
     [self addChildViewController:two];
     
     SMWebViewController *three = [[SMWebViewController alloc]initWithNibName:nil bundle:nil];
-    three.title = @"代码";
+    three.title = @"代码代码代码代码";
     three.webUrlString = @"https://github.com/angmu/MGPageView/blob/master/MGPageView/Handler/MGTopViewController.m";
     [self addChildViewController:three];
     
+    self.underLineColor = [UIColor blueColor];
+    self.selColor = [UIColor magentaColor];
     
     self.isFullDisplay = YES;
 }

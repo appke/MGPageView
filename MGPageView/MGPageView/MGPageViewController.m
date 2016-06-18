@@ -16,7 +16,7 @@
 @interface MGPageViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 /** 顶部所有标签栏 */
-@property (nonatomic, weak) UIScrollView *titlesView;
+@property (nonatomic, weak) UIScrollView *titleScrollView;
 
 /** 底部的内容collectionView */
 @property (nonatomic, weak) UICollectionView *contentCollectionView;
@@ -94,7 +94,7 @@
 - (CGFloat)titleHeight
 {
     if (_titleHeight == 0) {
-        _titleHeight = MGTitlesViewH;
+        _titleHeight = MGTitleScrollViewH;
     }
     return _titleHeight;
 }
@@ -122,17 +122,17 @@
 
 #pragma mark - 控件懒加载
 // 标题滚动视图
-- (UIScrollView *)titlesView
+- (UIScrollView *)titleScrollView
 {
-    if (_titlesView == nil) {
+    if (_titleScrollView == nil) {
         
-        UIScrollView *titlesView = [[UIScrollView alloc] init];
-        _titlesView = titlesView;
-        titlesView.backgroundColor = _titleViewColor ? _titleViewColor : [UIColor colorWithWhite:1 alpha:0.8];
-        titlesView.showsHorizontalScrollIndicator = NO;
-        [self.contentView addSubview:titlesView];
+        UIScrollView *titleScrollView = [[UIScrollView alloc] init];
+        _titleScrollView = titleScrollView;
+        titleScrollView.backgroundColor = _titleViewColor ? _titleViewColor : [UIColor colorWithWhite:1 alpha:0.8];
+        titleScrollView.showsHorizontalScrollIndicator = NO;
+        [self.contentView addSubview:titleScrollView];
     }
-    return _titlesView;
+    return _titleScrollView;
 }
 
 // 滚动内容视图
@@ -152,7 +152,7 @@
         contentCollectionView.delegate = self;
         contentCollectionView.dataSource = self;
         
-        [self.contentView insertSubview:contentCollectionView belowSubview:self.titlesView];
+        [self.contentView insertSubview:contentCollectionView belowSubview:self.titleScrollView];
     }
     
     return _contentCollectionView;
@@ -176,7 +176,7 @@
         _underLine = underLine;
         
         underLine.backgroundColor = _underLineColor ? _underLineColor : [UIColor redColor];
-        [self.titlesView addSubview:underLine];
+        [self.titleScrollView addSubview:underLine];
     }
     return _underLine;
 }
@@ -196,14 +196,13 @@
         self.contentView.frame = CGRectMake(0, 0, contentW, SCREEN_HEIGHT);
     }
     
-    
     // 设置标题视图尺寸
-    CGFloat titlesViewY = self.navigationController ? MGNavBarH : MGStatusBarH;
-    CGFloat titlesViewH = self.titleHeight;
-    self.titlesView.frame = CGRectMake(0, titlesViewY, contentW, titlesViewH);
+    CGFloat titleScrollViewY = self.navigationController ? MGNavBarH : MGStatusBarH;
+    CGFloat titleScrollViewH = self.titleHeight;
+    self.titleScrollView.frame = CGRectMake(0, titleScrollViewY, contentW, titleScrollViewH);
     
     // 设置滚动内容尺寸
-    CGFloat collectionViewY = CGRectGetMaxY(self.titlesView.frame);
+    CGFloat collectionViewY = CGRectGetMaxY(self.titleScrollView.frame);
     self.contentCollectionView.frame = _isFullDisplay ? CGRectMake(0, 0, contentW, SCREEN_HEIGHT) : CGRectMake(0, collectionViewY, contentW, SCREEN_HEIGHT - collectionViewY);
 }
 
@@ -258,13 +257,13 @@
     if (totalWidth > SCREEN_WIDTH) {
         
         _titleMargin = MGTitleMargin;
-        self.titlesView.contentInset = UIEdgeInsetsMake(0, 0, 0, MGTitleMargin);
+//        self.titleScrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, MGTitleMargin);
         return;
     }
     
     CGFloat titleMargin = (SCREEN_WIDTH - totalWidth) / (count + 1);
     _titleMargin = titleMargin < MGTitleMargin ? MGTitleMargin : titleMargin;
-    self.titlesView.contentInset = UIEdgeInsetsMake(0, 0, 0, _titleMargin);
+//    self.titleScrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, _titleMargin);
     
     // 为什么要增加 额外的滚动区域
 }
@@ -303,7 +302,7 @@
         
         // 把标题保存到数组中
         [self.titleLabels addObject:label];
-        [self.titlesView addSubview:label];
+        [self.titleScrollView addSubview:label];
         
         // 第一个label选中
         if (0 == i) {
@@ -311,11 +310,11 @@
         }
     }
     
-    // 设置标题视图 内容范围
+    // 设置标题视图 可滚动内容范围
     MGPageTitleLabel *lastLabel = [self.titleLabels lastObject];
-    self.titlesView.contentSize = CGSizeMake(CGRectGetMaxX(lastLabel.frame), 0);
+    self.titleScrollView.contentSize = CGSizeMake(CGRectGetMaxX(lastLabel.frame)+_titleMargin, 0);
     
-    // 设置滚动视图 内容范围
+    // 设置滚动视图 可滚动内容范围
     self.contentCollectionView.contentSize = CGSizeMake(SCREEN_WIDTH * count, 0);
 
 }
@@ -339,7 +338,6 @@
 
 - (void)selectLabel:(UILabel *)label
 {
-    
     for (MGPageTitleLabel *labelView in self.titleLabels) {
      
         if (labelView == label) continue;
@@ -379,7 +377,27 @@
 // 让选中的label居中
 - (void)setLabelTitleCenter:(UILabel *)label
 {
-    //
+    // 设置滚动区域的偏移量
+    CGFloat offsetX = label.center.x - SCREEN_WIDTH * 0.5;
+    // 只是 点击 屏幕右边label才滚——>点击屏幕左边的滚到0的位置
+    if (offsetX < 0) {
+        offsetX = 0;
+    }
+    
+    // 最大的标题视图滚动区域
+    // + _titleMargin
+    CGFloat maxOffsetX = self.titleScrollView.contentSize.width  - SCREEN_WIDTH ;
+    // 只有一个时
+    if (maxOffsetX < 0) {
+        maxOffsetX = 0;
+    }
+    
+    if (offsetX > maxOffsetX) {
+        offsetX = maxOffsetX;
+    }
+    
+    // 滚动区域
+    [self.titleScrollView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
 }
 
 

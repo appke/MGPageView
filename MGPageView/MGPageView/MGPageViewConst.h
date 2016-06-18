@@ -17,7 +17,7 @@ static CGFloat const MGStatusBarH = 20;
 /** 下划线指示器默认高度 */
 static CGFloat const MGUnderLineH = 2;
 /** 标题栏 默认高度 */
-static CGFloat const MGTitlesViewH = 40;
+static CGFloat const MGTitleScrollViewH = 40;
 /** 标题默认间距 */
 static CGFloat const MGTitleMargin = 20;
 
