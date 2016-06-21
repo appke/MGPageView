@@ -1,8 +1,19 @@
-### PagerTab
-页面滑动切换tab
+### PageViewController
+使用：
+- 继承
+
+
+- 参考
+ - [快速集成App中顶部标题滚动条](http://www.jianshu.com/p/b45655e23a42)
+ - []()
+
 
 
 ### iOS9, 点击状态回到scrollView回到最顶部
+- 参考
+ - [解决点击状态栏时ScrollView自动滚动到初始位置失效办法](http://www.jianshu.com/p/836cdd481982)
+ - [如何让页面中有多个UIScrollView时支持statusbar点击回顶部的功能](http://www.jianshu.com/p/3a75770cffb2)
+
 
 ```objc
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -39,8 +50,8 @@ static UIWindow *topWindow_;
 }
 
 ```
----
-点击状态栏，scrollView滚动最前面去
+
+#### 点击状态栏，scrollView滚动最前面去
 ```objc
 // MGTopViewController.m
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -76,19 +87,13 @@ static UIWindow *topWindow_;
 }
 ```
 ---
-
-###window的控制器决定状态栏的显示隐藏和样式
+### window的控制器决定状态栏的显示隐藏和样式
 ```objc
 // MGTopViewController.m
 #pragma mark - 状态栏控制
 - (BOOL)prefersStatusBarHidden
 {
     return self.statusBarHidden;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return self.statusBarStyle;
 }
 
 #pragma mark - 重写setter方法
@@ -98,9 +103,4 @@ static UIWindow *topWindow_;
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
-- (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle
-{
-    _statusBarStyle = statusBarStyle;
-    [self setNeedsStatusBarAppearanceUpdate];
-}
 ```

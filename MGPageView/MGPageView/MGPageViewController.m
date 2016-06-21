@@ -357,14 +357,16 @@
     
 }
 
-// 设置下标的位置
+/**
+ *  设置下标的位置
+ */
 - (void)setupUnderLine:(UILabel *)label
 {
     // 获取文字尺寸
     CGSize titleBounds = [label.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.titleFont} context:nil].size;
     
-    CGFloat underLineH = _underLineH ? _underLineH : MGUnderLineH;
-    self.underLine.y = label.height - underLineH;
+    CGFloat underLineH    = _underLineH ? _underLineH : MGUnderLineH;
+    self.underLine.y      = label.height - underLineH;
     self.underLine.height = underLineH;
     
     [UIView animateWithDuration:0.25 animations:^{
@@ -374,7 +376,9 @@
     }];
 }
 
-// 让选中的label居中
+/**
+ *  让选中的label居中
+ */
 - (void)setLabelTitleCenter:(UILabel *)label
 {
     // 设置滚动区域的偏移量
@@ -401,7 +405,6 @@
 }
 
 
-
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -424,7 +427,9 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-// 减速完成
+/**
+ *  减速完成
+ */
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
 
