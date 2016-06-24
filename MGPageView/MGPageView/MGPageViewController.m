@@ -10,8 +10,8 @@
 #import "MGPageViewConst.h"
 #import "MGPageFlowLayout.h"
 #import "MGPageTitleLabel.h"
-#import "UIViewAdditions.h"
 #import "UIView+Frame.h"
+
 
 @interface MGPageViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -317,6 +317,7 @@
     // 设置滚动视图 可滚动内容范围
     self.contentCollectionView.contentSize = CGSizeMake(SCREEN_WIDTH * count, 0);
 
+//    self.presentingViewController
 }
 
 #pragma mark - 标题点击处理
