@@ -5,19 +5,7 @@
  - 设置指示器属性
 
 
-- 参考
- - [快速集成App中顶部标题滚动条](http://www.jianshu.com/p/b45655e23a42)
- - [VTMagic的使用介绍](http://www.jianshu.com/p/cb2edb21055f)
- - [动手写一个快速集成网易新闻，腾讯视频，头条首页的ScrollPageView,显示滚动视图](http://www.jianshu.com/p/b84f4dd96d0c)
-
-
-
 ### iOS9下点击状态栏回到scrollView回到最顶部
-- 参考
- - [解决点击状态栏时ScrollView自动滚动到初始位置失效办法](http://www.jianshu.com/p/836cdd481982)
- - [如何让页面中有多个UIScrollView时支持statusbar点击回顶部的功能](http://www.jianshu.com/p/3a75770cffb2)
-
-
 ```objc
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // 添加一个window,屏幕上的scrollView滚动到最顶部
@@ -105,5 +93,11 @@ static UIWindow *topWindow_;
     _statusBarHidden = statusBarHidden;
     [self setNeedsStatusBarAppearanceUpdate];
 }
-
 ```
+
+#### 参考
+- [解决点击状态栏时ScrollView自动滚动到初始位置失效办法](http://www.jianshu.com/p/836cdd481982)
+- [如何让页面中有多个UIScrollView时支持statusbar点击回顶部的功能](http://www.jianshu.com/p/3a75770cffb2)
+- [快速集成App中顶部标题滚动条](http://www.jianshu.com/p/b45655e23a42)
+- [VTMagic的使用介绍](http://www.jianshu.com/p/cb2edb21055f)
+- [动手写一个快速集成网易新闻，腾讯视频，头条首页的ScrollPageView,显示滚动视图](http://www.jianshu.com/p/b84f4dd96d0c)
