@@ -1,8 +1,7 @@
-### PageViewController
-使用：<p>
- - 继承PageViewController
- - 添加子控制器
- - 设置指示器属性
+### PageViewController使用
+- 继承PageViewController
+- 添加子控制器
+- 设置指示器属性
 
 
 ### iOS9下点击状态栏回到scrollView回到最顶部
